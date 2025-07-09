@@ -30,12 +30,14 @@ function addPlayer() {
 function updateScoreForm() {
     const form = document.getElementById("score-form");
     form.innerHTML = "";
+
     players.forEach(player => {
         const input = document.createElement("input");
         input.type = "number";
         input.name = player;
         input.placeholder = `Score de ${player}`;
         input.disabled = false;
+        input.setAttribute("step", "1");
         form.appendChild(input);
         form.appendChild(document.createElement("br"));
     });
@@ -53,7 +55,35 @@ function submitScores() {
 
     const inputs = document.getElementById("score-form").getElementsByTagName("input");
     if (inputs.length === 0) {
-        alert("Les champs de score ne sont pas encore prêts. Ajoutez un joueur ou rechargez la page.");
+        alert("Les champs de score ne sont pas prêts. Ajoutez un joueur ou rechargez la page.");
+        submitBtn.disabled = false;
+        return;
+    }
+
+    
+    const round = {};
+    let allFilled = true;
+
+    for (let input of inputs) {
+        const name = input.name;
+        const value = input.value.trim();
+
+        if (value === "") {
+            allFilled = false;
+            break;
+        }
+
+        const parsedValue = parseInt(value);
+        if (isNaN(parsedValue)) {
+            allFilled = false;
+            break;
+        }
+
+        round[name] = parsedValue;
+    }
+
+    if (!allFilled) {
+        alert("Chaque joueur doit entrer un score pour finir la manche.");
         submitBtn.disabled = false;
         return;
     }
@@ -64,15 +94,9 @@ function submitScores() {
         document.getElementById("add-player-btn").disabled = true;
     }
 
-    const round = {};
-    for (let input of inputs) {
-        const name = input.name;
-        const value = parseInt(input.value);
-        if (!isNaN(value)) {
-            totalScores[name] += value;
-            round[name] = value;
-        }
-        input.value = "";
+    
+    for (let player in round) {
+        totalScores[player] += round[player];
     }
 
     history.push(round);
@@ -80,6 +104,10 @@ function submitScores() {
     updateHistory();
     checkEndGame();
 
+    
+    for (let input of inputs) {
+        input.value = "";
+    }
 
     if (!isGameOver()) {
         submitBtn.disabled = false;
@@ -116,10 +144,9 @@ function checkEndGame() {
             alert(`Fin de la partie ! Le joueur ayant le moins de points gagne.`);
             showWinner();
 
+            
             document.querySelector('#score-container button').disabled = true;
-
             document.getElementById("restart-btn").style.display = "inline-block";
-
             document.querySelectorAll("#score-form input").forEach(input => {
                 input.disabled = true;
             });
@@ -157,7 +184,6 @@ function restartGame() {
 
     document.getElementById("player-name").disabled = false;
     document.getElementById("add-player-btn").disabled = false;
-
     document.querySelector('#score-container button').disabled = false;
     document.getElementById("restart-btn").style.display = "none";
 }

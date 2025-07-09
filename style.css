@@ -1,3 +1,11 @@
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 2rem;
@@ -6,11 +14,8 @@ body {
 
     background: radial-gradient(circle at center,
             #7ad1cb 0%,
-            /* turquoise clair au centre */
             #3a9ca8 40%,
-            /* bleu canard moyen autour */
             #1c5963 100%
-            /* bleu très foncé sur les bords */
         );
 
     display: flex;
@@ -30,11 +35,11 @@ body {
     margin-bottom: 1.5rem;
 }
 
-h2 {
+h1, h2 {
+    text-align: center;
     color: #d62828;
     font-weight: 700;
     margin-bottom: 0.8rem;
-    text-align: center;
 }
 
 h2 {
@@ -43,21 +48,18 @@ h2 {
     width: 100%;
 }
 
-h1 {
-    text-align: center;
-}
-
 input[type="text"],
 input[type="number"] {
     padding: 8px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
     border-radius: 4px;
     border: 1.5px solid #003049;
     width: 180px;
     font-size: 1rem;
     box-sizing: border-box;
     color: #03045e;
+    touch-action: manipulation;
+    -webkit-appearance: none; /* évite zoom iOS */
 }
 
 input::placeholder {
@@ -67,16 +69,13 @@ input::placeholder {
 
 button {
     padding: 8px 16px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0;
     background-color: #f77f00;
     border: none;
     border-radius: 6px;
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: none;
-    will-change: transform, opacity;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
