@@ -70,29 +70,31 @@ function submitScores() {
         document.getElementById("add-player-btn").disabled = true;
     }
 
+    for (let input of inputs) {
+        const name = input.name;
+        const valueStr = input.value.trim();
+
+        if (valueStr === "") {
+            alert(`Veuillez saisir un score pour ${name}.`);
+            submitBtn.disabled = false;
+            return;
+        }
+
+        if (!/^[-]?\d+$/.test(valueStr)) {
+            alert(`Veuillez entrer un nombre entier valide pour ${name}.`);
+            submitBtn.disabled = false;
+            return; 
+        }
+    }
+
     const round = {};
-for (let input of inputs) {
-    const name = input.name;
-    const valueStr = input.value.trim();
-
-    if (valueStr === "") {
-        alert(`Veuillez saisir un score pour ${name}.`);
-        submitBtn.disabled = false;
-        return;
+    for (let input of inputs) {
+        const name = input.name;
+        const value = parseInt(input.value.trim());
+        totalScores[name] += value;
+        round[name] = value;
+        input.value = ""; 
     }
-
-    if (!/^[-]?\d+$/.test(valueStr)) {
-        alert(`Veuillez entrer un nombre entier valide pour ${name}.`);
-        submitBtn.disabled = false;
-        return;
-    }
-
-    const value = parseInt(valueStr);
-    totalScores[name] += value;
-    round[name] = value;
-    input.value = "";
-}
-
 
     history.push(round);
     updateScoreboard();
@@ -103,6 +105,8 @@ for (let input of inputs) {
         submitBtn.disabled = false;
     }
 }
+
+
 
 function updateScoreboard() {
     const scoreboard = document.getElementById("scoreboard");
