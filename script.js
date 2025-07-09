@@ -33,19 +33,16 @@ function updateScoreForm() {
 
     players.forEach(player => {
         const input = document.createElement("input");
-        input.type = "text";
-        input.inputMode = "numeric";
+        input.type = "tel";
         input.pattern = "-?[0-9]*";
         input.name = player;
         input.placeholder = `Score de ${player}`;
         input.disabled = false;
-        input.setAttribute("step", "1");
         input.autocomplete = "off";
         form.appendChild(input);
         form.appendChild(document.createElement("br"));
     });
 }
-
 
 function submitScores() {
     const submitBtn = document.querySelector('#score-container button');
