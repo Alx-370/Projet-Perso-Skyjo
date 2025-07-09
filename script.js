@@ -32,16 +32,33 @@ function updateScoreForm() {
     form.innerHTML = "";
 
     players.forEach(player => {
-        const input = document.createElement("input");
-        input.type = "tel";
-        input.pattern = "-?[0-9]*";
-        input.name = player;
-        input.placeholder = `Score de ${player}`;
-        input.disabled = false;
-        input.autocomplete = "off";
-        form.appendChild(input);
-        form.appendChild(document.createElement("br"));
-    });
+    const wrapper = document.createElement("div");
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.setAttribute("inputmode", "numeric");
+    input.pattern = "-?[0-9]*";
+    input.name = player;
+    input.placeholder = `Score de ${player}`;
+    input.autocomplete = "off";
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.type = "button";
+    toggleBtn.textContent = "±";
+    toggleBtn.style.marginLeft = "5px";
+    toggleBtn.onclick = () => {
+        if (input.value.startsWith("-")) {
+            input.value = input.value.slice(1);
+        } else {
+            input.value = "-" + input.value;
+        }
+    };
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(toggleBtn);
+    form.appendChild(wrapper);
+    form.appendChild(document.createElement("br"));
+});
 }
 
 function submitScores() {
