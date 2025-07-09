@@ -32,37 +32,43 @@ function updateScoreForm() {
     form.innerHTML = "";
 
     players.forEach(player => {
-    const wrapper = document.createElement("div");
+        const wrapper = document.createElement("div");
 
-    const input = document.createElement("input");
-    input.type = "text";
-    input.setAttribute("inputmode", "numeric");
-    input.pattern = "-?[0-9]*";
-    input.name = player;
-    input.placeholder = `Score de ${player}`;
-    input.autocomplete = "off";
+        const input = document.createElement("input");
+        input.type = "text";
+        input.setAttribute("inputmode", "numeric");
+        input.pattern = "-?[0-9]*";
+        input.name = player;
+        input.placeholder = `Score de ${player}`;
+        input.autocomplete = "off";
 
-    const toggleBtn = document.createElement("button");
-    toggleBtn.type = "button";
-    toggleBtn.textContent = "±";
-    toggleBtn.style.marginLeft = "5px";
-    toggleBtn.onclick = () => {
-        if (input.value.startsWith("-")) {
-            input.value = input.value.slice(1);
-        } else {
-            input.value = "-" + input.value;
-        }
-    };
+        const toggleBtn = document.createElement("button");
+        toggleBtn.type = "button";
+        toggleBtn.classList.add("minus-button");
+        toggleBtn.innerHTML = `
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
+                                <rect x="2" y="7" width="12" height="2" fill="currentColor"/>
+                                </svg>
+                                    `;
+        toggleBtn.classList.add("minus-button");
+        toggleBtn.style.marginLeft = "5px";
+        toggleBtn.onclick = () => {
+            if (input.value.startsWith("-")) {
+                input.value = input.value.slice(1);
+            } else {
+                input.value = "-" + input.value;
+            }
+        };
 
-    wrapper.appendChild(input);
-    wrapper.appendChild(toggleBtn);
-    form.appendChild(wrapper);
-    form.appendChild(document.createElement("br"));
-});
+        wrapper.appendChild(input);
+        wrapper.appendChild(toggleBtn);
+        form.appendChild(wrapper);
+        form.appendChild(document.createElement("br"));
+    });
 }
 
 function submitScores() {
-    const submitBtn = document.querySelector('#score-container button');
+    const submitBtn = document.getElementById("submit-scores-btn");
     submitBtn.disabled = true;
 
     if (players.length === 0) {
@@ -87,7 +93,6 @@ function submitScores() {
     let hasError = false;
     let errorMessages = [];
 
-    
     for (let input of inputs) {
         const name = input.name;
         const valueStr = input.value.trim();
@@ -107,7 +112,6 @@ function submitScores() {
         return;
     }
 
-    
     const round = {};
     for (let input of inputs) {
         const name = input.name;
@@ -157,11 +161,16 @@ function checkEndGame() {
             alert(`Fin de la partie ! Le joueur ayant le moins de points gagne.`);
             showWinner();
 
-            
-            document.querySelector('#score-container button').disabled = true;
+
+            document.getElementById("submit-scores-btn").disabled = true;
             document.getElementById("restart-btn").style.display = "inline-block";
+
             document.querySelectorAll("#score-form input").forEach(input => {
                 input.disabled = true;
+            });
+
+            document.querySelectorAll("#score-form button").forEach(btn => {
+                btn.disabled = true;
             });
 
             return;
@@ -197,6 +206,6 @@ function restartGame() {
 
     document.getElementById("player-name").disabled = false;
     document.getElementById("add-player-btn").disabled = false;
-    document.querySelector('#score-container button').disabled = false;
+    document.getElementById("submit-scores-btn").disabled = false;
     document.getElementById("restart-btn").style.display = "none";
 }

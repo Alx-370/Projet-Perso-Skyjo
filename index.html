@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Skyjo Score Tracker</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="logoSkyjo.jpg"/>
+    <link rel="icon" type="image/png" href="logoSkyjo.jpg" />
 </head>
 
 <body>
@@ -22,7 +22,7 @@
     <div id="score-container">
         <h2>Entrer les scores de la manche</h2>
         <div id="score-form"></div>
-        <button onclick="submitScores()">Valider la manche</button>
+        <button id="submit-scores-btn" onclick="submitScores()">Valider la manche</button>
     </div>
 
     <button id="restart-btn" style="display:none;" onclick="restartGame()">Restart Game</button>
@@ -33,7 +33,7 @@
     </div>
 
     <div id="history">
-        <h2>Historique des manches</h2>
+        <h2 style="margin-bottom: 30px">Historique des manches</h2>
         <div id="round-history"></div>
     </div>
 

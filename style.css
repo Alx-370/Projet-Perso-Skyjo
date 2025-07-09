@@ -78,6 +78,13 @@ button {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
+.minus-sign {
+  font-size: 20px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+
 button:hover {
     background-color: #d96f00;
 }
@@ -98,7 +105,7 @@ li {
 }
 
 #history {
-    margin-top: 2rem;
+    margin-top: 1rem;
     background-color: #caf0f8;
     padding: 1rem;
     border-radius: 8px;
@@ -107,7 +114,7 @@ li {
 }
 
 .round {
-    margin-bottom: 1rem;
+    margin-bottom: 70px;
     padding: 0.8rem 1rem;
     background: #90e0ef;
     border-left: 6px solid #f77f00;
@@ -155,3 +162,17 @@ input:disabled {
     color: #666;
     opacity: 0.5;
 }
+
+#score-form button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.minus-button{
+    background: radial-gradient(circle at center,
+            #B6B7D2 0%,
+            #3C3295 40%,
+            #240054 100%
+        );
+}
+
