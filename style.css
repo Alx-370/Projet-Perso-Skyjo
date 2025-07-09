@@ -1,0 +1,159 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 2rem;
+    background-color: #f0f6f9;
+    color: #003049;
+
+    background: radial-gradient(circle at center,
+            #7ad1cb 0%,
+            /* turquoise clair au centre */
+            #3a9ca8 40%,
+            /* bleu canard moyen autour */
+            #1c5963 100%
+            /* bleu très foncé sur les bords */
+        );
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#players-container,
+#score-container,
+#results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    color: #d62828;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    text-align: center;
+}
+
+h2 {
+    border-bottom: 2px solid #f77f00;
+    padding-bottom: 0.3rem;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1.5px solid #003049;
+    width: 180px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #03045e;
+}
+
+input::placeholder {
+    color: #0077b6;
+    font-style: italic;
+}
+
+button {
+    padding: 8px 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #f77f00;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: none;
+    will-change: transform, opacity;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+button:hover {
+    background-color: #d96f00;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+li {
+    margin: 5px 0;
+    background-color: #ade8f4;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: #03045e;
+    font-weight: 600;
+}
+
+#history {
+    margin-top: 2rem;
+    background-color: #caf0f8;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.round {
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    background: #90e0ef;
+    border-left: 6px solid #f77f00;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.round h3 {
+    margin-top: 0;
+    color: #d62828;
+}
+
+#restart-btn {
+    margin: 1rem auto;
+    display: none;
+    padding: 10px 20px;
+    background-color: #f04e23;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#restart-btn:hover {
+    background-color: #d6441c;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+button:focus {
+    outline: 2px solid #f77f00;
+    outline-offset: 2px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    opacity: 0.5;
+    color: #666;
+    cursor: not-allowed;
+}
+
+input:disabled {
+    background-color: #e0e0e0;
+    color: #666;
+    opacity: 0.5;
+}
