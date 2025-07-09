@@ -37,12 +37,13 @@ body {
 
 h1, h2 {
     text-align: center;
-    color: #d62828;
+    
     font-weight: 700;
     margin-bottom: 0.8rem;
 }
 
 h2 {
+    color: #d62828;
     border-bottom: 2px solid #f77f00;
     padding-bottom: 0.3rem;
     width: 100%;
@@ -59,7 +60,6 @@ input[type="number"] {
     box-sizing: border-box;
     color: #03045e;
     touch-action: manipulation;
-    -webkit-appearance: none; /* évite zoom iOS */
 }
 
 input::placeholder {
