@@ -70,30 +70,37 @@ function submitScores() {
         document.getElementById("add-player-btn").disabled = true;
     }
 
+    let hasError = false;
+    let errorMessages = [];
+
+    
     for (let input of inputs) {
         const name = input.name;
         const valueStr = input.value.trim();
 
         if (valueStr === "") {
-            alert(`Veuillez saisir un score pour ${name}.`);
-            submitBtn.disabled = false;
-            return;
-        }
-
-        if (!/^[-]?\d+$/.test(valueStr)) {
-            alert(`Veuillez entrer un nombre entier valide pour ${name}.`);
-            submitBtn.disabled = false;
-            return; 
+            hasError = true;
+            errorMessages.push(`Veuillez saisir un score pour ${name}.`);
+        } else if (!/^[-]?\d+$/.test(valueStr)) {
+            hasError = true;
+            errorMessages.push(`Veuillez entrer un nombre entier valide pour ${name}.`);
         }
     }
 
+    if (hasError) {
+        alert(errorMessages.join("\n"));
+        submitBtn.disabled = false;
+        return;
+    }
+
+    
     const round = {};
     for (let input of inputs) {
         const name = input.name;
         const value = parseInt(input.value.trim());
         totalScores[name] += value;
         round[name] = value;
-        input.value = ""; 
+        input.value = "";
     }
 
     history.push(round);
@@ -105,8 +112,6 @@ function submitScores() {
         submitBtn.disabled = false;
     }
 }
-
-
 
 function updateScoreboard() {
     const scoreboard = document.getElementById("scoreboard");
