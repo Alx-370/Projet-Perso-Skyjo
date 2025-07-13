@@ -20,7 +20,7 @@ Annoncer le gagnant et permettre de redémarrer une nouvelle partie d’un clic.
 <p>Ce projet m’a permis de consolider mes compétences en **manipulation du DOM**, **gestion d’événements**, et **logique de jeu multi-joueur**. Il est également responsive et facile à prendre en main !</p>
 <br>
 ➡️ Envie d'essayer ?
-👉 Lien vers le projet (à adapter selon ton déploiement)
+Lien vers le projet 👉  https://alx-370.github.io/Projet-Perso-Skyjo/
 
 <p>Ouvrir le fichier <code>index.html</code> pour démarrer la partie</p>
 
