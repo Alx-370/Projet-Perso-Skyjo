@@ -1,9 +1,11 @@
-
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }
 
 body {
@@ -15,8 +17,7 @@ body {
     background: radial-gradient(circle at center,
             #7ad1cb 0%,
             #3a9ca8 40%,
-            #1c5963 100%
-        );
+            #1c5963 100%);
 
     display: flex;
     flex-direction: column;
@@ -35,9 +36,10 @@ body {
     margin-bottom: 1.5rem;
 }
 
-h1, h2 {
+h1,
+h2 {
     text-align: center;
-    
+
     font-weight: 700;
     margin-bottom: 0.8rem;
 }
@@ -52,6 +54,7 @@ h2 {
 input {
     padding: 8px;
     margin: 10px 0;
+    margin-right: 5px;
     border-radius: 4px;
     border: 1.5px solid #003049;
     width: 180px;
@@ -67,6 +70,8 @@ input::placeholder {
 }
 
 button {
+    display: flex;
+    align-items: center;
     padding: 8px 16px;
     margin: 10px 0;
     background-color: #f77f00;
@@ -79,9 +84,9 @@ button {
 }
 
 .minus-sign {
-  font-size: 20px;
-  font-weight: bold;
-  vertical-align: middle;
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: middle;
 }
 
 
@@ -114,7 +119,7 @@ li {
 }
 
 .round {
-    margin-bottom: 70px;
+    margin-bottom: 20px;
     padding: 0.8rem 1rem;
     background: #90e0ef;
     border-left: 6px solid #f77f00;
@@ -168,11 +173,22 @@ input:disabled {
     cursor: not-allowed;
 }
 
-.minus-button{
+.minus-button {
     background: radial-gradient(circle at center,
             #B6B7D2 0%,
             #3C3295 40%,
-            #240054 100%
-        );
+            #240054 100%);
 }
 
+.score-input-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.double-button {
+    font-size: 19px;
+    background: radial-gradient(circle at center,
+            #B6B7D2 0%,
+            #FF4E42 50%,
+            #B80000 100%);
+}

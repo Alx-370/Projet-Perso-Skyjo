@@ -33,6 +33,7 @@ function updateScoreForm() {
 
     players.forEach(player => {
         const wrapper = document.createElement("div");
+        wrapper.className = "score-input-wrapper";
 
         const input = document.createElement("input");
         input.type = "text";
@@ -42,17 +43,15 @@ function updateScoreForm() {
         input.placeholder = `Score de ${player}`;
         input.autocomplete = "off";
 
-        const toggleBtn = document.createElement("button");
-        toggleBtn.type = "button";
-        toggleBtn.classList.add("minus-button");
-        toggleBtn.innerHTML = `
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-                                <rect x="2" y="7" width="12" height="2" fill="currentColor"/>
-                                </svg>
-                                    `;
-        toggleBtn.classList.add("minus-button");
-        toggleBtn.style.marginLeft = "5px";
-        toggleBtn.onclick = () => {
+        // Bouton -
+        const minusBtn = document.createElement("button");
+        minusBtn.type = "button";
+        minusBtn.classList.add("minus-button");
+        minusBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
+                <rect x="2" y="7" width="12" height="2" fill="currentColor"/>
+            </svg>`;
+        minusBtn.onclick = () => {
             if (input.value.startsWith("-")) {
                 input.value = input.value.slice(1);
             } else {
@@ -60,12 +59,27 @@ function updateScoreForm() {
             }
         };
 
+        // Bouton x2
+        const doubleBtn = document.createElement("button");
+        doubleBtn.type = "button";
+        doubleBtn.classList.add("double-button");
+        doubleBtn.textContent = "×2";
+        doubleBtn.style.marginLeft = "5px";
+        doubleBtn.onclick = () => {
+            let value = input.value.trim();
+            if (/^-?\d+$/.test(value)) {
+                input.value = String(parseInt(value) * 2);
+            }
+        };
+
         wrapper.appendChild(input);
-        wrapper.appendChild(toggleBtn);
+        wrapper.appendChild(minusBtn);
+        wrapper.appendChild(doubleBtn);
         form.appendChild(wrapper);
         form.appendChild(document.createElement("br"));
     });
 }
+
 
 function submitScores() {
     const submitBtn = document.getElementById("submit-scores-btn");
