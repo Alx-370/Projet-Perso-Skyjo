@@ -173,22 +173,70 @@ input:disabled {
     cursor: not-allowed;
 }
 
-.minus-button {
-    background: radial-gradient(circle at center,
-            #B6B7D2 0%,
-            #3C3295 50%,
-            #240054 100%);
-}
-
 .score-input-wrapper {
     display: flex;
     flex-direction: row;
 }
 
 .double-button {
-    font-size: 19px;
-    background: radial-gradient(circle at center,
-            #B6B7D2 0%,
-            #FF4E42 50%,
-            #B80000 100%);
+  font-family: 'Economica', sans-serif;
+  font-size: 19px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  background: linear-gradient(
+    0deg, 
+    #d46e00 0%,
+    rgb(189, 0, 0) 100% 
+    
+  );
+  background-size: 100% 1000%;
+  animation: bgShift 6s linear infinite;
 }
+
+@keyframes bgShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.minus-button {
+  font-family: 'Economica', sans-serif;
+  font-size: 19px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  background: linear-gradient(
+    0deg, 
+    #3C3295 50%,
+    #240054 100% 
+    
+  );
+  background-size: 100% 1000%;
+  animation: bgShift2 6s linear infinite;
+}
+
+@keyframes bgShift2 {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
