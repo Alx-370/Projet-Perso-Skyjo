@@ -176,7 +176,7 @@ input:disabled {
 .minus-button {
     background: radial-gradient(circle at center,
             #B6B7D2 0%,
-            #3C3295 40%,
+            #3C3295 50%,
             #240054 100%);
 }
 
