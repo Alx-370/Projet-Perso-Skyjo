@@ -24,9 +24,7 @@
         <div id="score-form"></div>
         <button id="submit-scores-btn" onclick="submitScores()">Valider la manche</button>
     </div>
-
-    <button id="restart-btn" style="display:none;" onclick="restartGame()">Restart Game</button>
-
+    
     <div id="results">
         <h2>Résultats</h2>
         <ul id="scoreboard"></ul>
@@ -35,6 +33,23 @@
     <div id="history">
         <h2>Historique des manches</h2>
         <div id="round-history"></div>
+    </div>
+
+    <div id="winner-popup" class="hidden">
+        <div class="winner-content">
+            🎉 Le gagnant est <span id="winner-name"></span> avec <span id="winner-score"></span> points !
+            <br /><br />
+            <button id="restart-btn-popup" onclick="restartGame()">Recommencer</button>
+            <button id="details-btn" onclick="toggleDetails()">Détails de la partie</button>
+        </div>
+    </div>
+
+    <div id="details-modal" class="hidden">
+        <div class="modal-content">
+            <h2>Détails de la partie</h2>
+            <button id="close-details-btn" onclick="toggleDetails()">Fermer</button>
+            <div id="detailed-history"></div>
+        </div>
     </div>
 
 

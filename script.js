@@ -39,7 +39,11 @@ function updateScoreForm() {
         input.type = "text";
         input.setAttribute("inputmode", "numeric");
         input.pattern = "-?[0-9]*";
-        input.name = player;
+
+        // Ajout des attributs id et name uniques ici
+        input.id = `score-input-${player}`;
+        input.name = `score-input-${player}`;
+
         input.placeholder = `Score de ${player}`;
         input.autocomplete = "off";
 
@@ -79,7 +83,6 @@ function updateScoreForm() {
         form.appendChild(document.createElement("br"));
     });
 }
-
 
 function submitScores() {
     const submitBtn = document.getElementById("submit-scores-btn");
@@ -128,10 +131,11 @@ function submitScores() {
 
     const round = {};
     for (let input of inputs) {
-        const name = input.name;
+        // On récupère le player à partir de input.name en enlevant le préfixe
+        const player = input.name.replace("score-input-", "");
         const value = parseInt(input.value.trim());
-        totalScores[name] += value;
-        round[name] = value;
+        totalScores[player] += value;
+        round[player] = value;
         input.value = "";
     }
 
@@ -157,39 +161,73 @@ function updateScoreboard() {
 
 function updateHistory() {
     const container = document.getElementById("round-history");
+    if (!container) {
+        console.warn("L'élément #round-history est introuvable dans le DOM.");
+        return; 
+    }
+
     container.innerHTML = "";
+
+    const gameOver = isGameOver();
 
     history.forEach((round, index) => {
         const div = document.createElement("div");
         div.classList.add("round");
-        div.innerHTML = `<h3>Manche ${index + 1}</h3><ul>` +
-            players.map(p => `<li>${p} : ${round[p] ?? 0} pts</li>`).join("") +
-            `</ul>`;
+
+        const listItems = players.map(p => {
+            const score = round[p] ?? 0;
+            return `
+                <li>
+                    ${p} :
+                    <input type="number"
+                        id="history-score-${index}-${p}"
+                        name="history-score-${index}-${p}"
+                        value="${score}"
+                        ${gameOver ? "readonly" : ""}
+                        onchange="editScore(${index}, '${p}', this.value)"
+                        style="width: 60px;" />
+                    pts
+                </li>`;
+        }).join("");
+
+        div.innerHTML = `<h3>Manche ${index + 1}</h3><ul>${listItems}</ul>`;
         container.appendChild(div);
     });
 }
 
+function editScore(roundIndex, player, newValue) {
+    newValue = parseInt(newValue);
+
+    if (isNaN(newValue)) {
+        alert("Veuillez entrer une valeur valide.");
+        return;
+    }
+
+    const oldValue = history[roundIndex][player] || 0;
+    const diff = newValue - oldValue;
+
+    history[roundIndex][player] = newValue;
+    totalScores[player] += diff;
+
+    updateScoreboard();
+    updateHistory();
+}
+
 function checkEndGame() {
-    for (let player in totalScores) {
-        if (totalScores[player] >= 100) {
-            alert(`Fin de la partie ! Le joueur ayant le moins de points gagne.`);
+    const someoneReachedLimit = Object.values(totalScores).some(score => score >= 100);
+
+    if (!someoneReachedLimit) return;
+
+    requestAnimationFrame(() => {
+        setTimeout(() => {
             showWinner();
 
-
             document.getElementById("submit-scores-btn").disabled = true;
-            document.getElementById("restart-btn").style.display = "inline-block";
 
-            document.querySelectorAll("#score-form input").forEach(input => {
-                input.disabled = true;
-            });
-
-            document.querySelectorAll("#score-form button").forEach(btn => {
-                btn.disabled = true;
-            });
-
-            return;
-        }
-    }
+            document.querySelectorAll("#score-form input").forEach(input => input.disabled = true);
+            document.querySelectorAll("#score-form button").forEach(btn => btn.disabled = true);
+        }, 200);
+    });
 }
 
 function isGameOver() {
@@ -203,7 +241,10 @@ function showWinner() {
             winner = p;
         }
     });
-    alert(`🎉 Le gagnant est ${winner} avec ${totalScores[winner]} points !`);
+
+    document.getElementById("winner-name").textContent = winner;
+    document.getElementById("winner-score").textContent = totalScores[winner];
+    document.getElementById("winner-popup").classList.remove("hidden");
 }
 
 function restartGame() {
@@ -221,5 +262,50 @@ function restartGame() {
     document.getElementById("player-name").disabled = false;
     document.getElementById("add-player-btn").disabled = false;
     document.getElementById("submit-scores-btn").disabled = false;
-    document.getElementById("restart-btn").style.display = "none";
+
+    const popup = document.getElementById("winner-popup");
+    if (popup) {
+        popup.classList.add("hidden");
+    }
+}
+
+function toggleDetails() {
+    const modal = document.getElementById("details-modal");
+    if (modal.classList.contains("hidden")) {
+        modal.classList.remove("hidden");
+        renderDetailedHistory();
+    } else {
+        modal.classList.add("hidden");
+    }
+}
+
+function renderDetailedHistory() {
+    const container = document.getElementById("detailed-history");
+    container.innerHTML = "";
+
+    if (history.length === 0) {
+        container.textContent = "Aucune manche jouée pour le moment.";
+        return;
+    }
+
+    history.forEach((round, index) => {
+        const div = document.createElement("div");
+        div.style.borderBottom = "1px solid #ccc";
+        div.style.marginBottom = "1rem";
+        div.style.paddingBottom = "0.5rem";
+
+        const title = document.createElement("h3");
+        title.textContent = `Manche ${index + 1}`;
+        div.appendChild(title);
+
+        const ul = document.createElement("ul");
+        players.forEach(player => {
+            const li = document.createElement("li");
+            li.textContent = `${player} : ${round[player] ?? 0} points`;
+            ul.appendChild(li);
+        });
+        div.appendChild(ul);
+
+        container.appendChild(div);
+    });
 }
