@@ -40,14 +40,14 @@ function updateScoreForm() {
         input.setAttribute("inputmode", "numeric");
         input.pattern = "-?[0-9]*";
 
-        // Ajout des attributs id et name uniques ici
         input.id = `score-input-${player}`;
-        input.name = `score-input-${player}`;
+        input.name = `${player}`;
+
+        input.setAttribute("data-player", player);
 
         input.placeholder = `Score de ${player}`;
         input.autocomplete = "off";
 
-        // Bouton -
         const minusBtn = document.createElement("button");
         minusBtn.type = "button";
         minusBtn.classList.add("minus-button");
@@ -63,7 +63,6 @@ function updateScoreForm() {
             }
         };
 
-        // Bouton x2
         const doubleBtn = document.createElement("button");
         doubleBtn.type = "button";
         doubleBtn.classList.add("double-button");
@@ -131,13 +130,13 @@ function submitScores() {
 
     const round = {};
     for (let input of inputs) {
-        // On récupère le player à partir de input.name en enlevant le préfixe
-        const player = input.name.replace("score-input-", "");
+        const player = input.getAttribute("data-player");
         const value = parseInt(input.value.trim());
         totalScores[player] += value;
         round[player] = value;
         input.value = "";
     }
+
 
     history.push(round);
     updateScoreboard();
@@ -163,7 +162,7 @@ function updateHistory() {
     const container = document.getElementById("round-history");
     if (!container) {
         console.warn("L'élément #round-history est introuvable dans le DOM.");
-        return; 
+        return;
     }
 
     container.innerHTML = "";
@@ -176,19 +175,21 @@ function updateHistory() {
 
         const listItems = players.map(p => {
             const score = round[p] ?? 0;
+            const editable = !gameOver && index === history.length - 1;
+
             return `
-                <li>
-                    ${p} :
-                    <input type="number"
-                        id="history-score-${index}-${p}"
-                        name="history-score-${index}-${p}"
-                        value="${score}"
-                        ${gameOver ? "readonly" : ""}
-                        onchange="editScore(${index}, '${p}', this.value)"
-                        style="width: 60px;" />
-                    pts
-                </li>`;
+        <li>
+            ${p} :
+            <input type="number"
+                id="history-score-${index}-${p}"
+                name="history-score-${index}-${p}"
+                value="${score}"
+                ${editable ? `onchange="editScore(${index}, '${p}', this.value)"` : "readonly class='readonly-score'"}
+                style="width: 60px;" />
+            pts
+        </li>`;
         }).join("");
+
 
         div.innerHTML = `<h3>Manche ${index + 1}</h3><ul>${listItems}</ul>`;
         container.appendChild(div);
@@ -211,6 +212,7 @@ function editScore(roundIndex, player, newValue) {
 
     updateScoreboard();
     updateHistory();
+    checkEndGame();
 }
 
 function checkEndGame() {
@@ -235,16 +237,29 @@ function isGameOver() {
 }
 
 function showWinner() {
+    if (players.length === 0) return;
+
     let winner = players[0];
+    let loser = players[0];
+
     players.forEach(p => {
         if (totalScores[p] < totalScores[winner]) {
             winner = p;
+        }
+        if (totalScores[p] > totalScores[loser]) {
+            loser = p;
         }
     });
 
     document.getElementById("winner-name").textContent = winner;
     document.getElementById("winner-score").textContent = totalScores[winner];
-    document.getElementById("winner-popup").classList.remove("hidden");
+
+    document.getElementById("loser-name").textContent = loser;
+    document.getElementById("loser-score").textContent = totalScores[loser];
+
+    const popup = document.getElementById("winner-popup");
+    popup.classList.remove("hidden");
+    popup.classList.add("show");
 }
 
 function restartGame() {
@@ -288,6 +303,26 @@ function renderDetailedHistory() {
         return;
     }
 
+    const finalScoresDiv = document.createElement("div");
+    finalScoresDiv.style.borderBottom = "2px solid #d62828";
+    finalScoresDiv.style.marginBottom = "1rem";
+    finalScoresDiv.style.paddingBottom = "0.5rem";
+
+    const finalTitle = document.createElement("h3");
+    finalTitle.textContent = "Scores finaux";
+    finalTitle.style.color = "#d62828";
+    finalScoresDiv.appendChild(finalTitle);
+
+    const finalUl = document.createElement("ul");
+    players.forEach(player => {
+        const li = document.createElement("li");
+        li.textContent = `${player} : ${totalScores[player]} points`;
+        finalUl.appendChild(li);
+    });
+    finalScoresDiv.appendChild(finalUl);
+
+    container.appendChild(finalScoresDiv);
+
     history.forEach((round, index) => {
         const div = document.createElement("div");
         div.style.borderBottom = "1px solid #ccc";
@@ -309,3 +344,4 @@ function renderDetailedHistory() {
         container.appendChild(div);
     });
 }
+

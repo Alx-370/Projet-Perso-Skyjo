@@ -24,7 +24,7 @@
         <div id="score-form"></div>
         <button id="submit-scores-btn" onclick="submitScores()">Valider la manche</button>
     </div>
-    
+
     <div id="results">
         <h2>Résultats</h2>
         <ul id="scoreboard"></ul>
@@ -38,7 +38,9 @@
     <div id="winner-popup" class="hidden">
         <div class="winner-content">
             🎉 Le gagnant est <span id="winner-name"></span> avec <span id="winner-score"></span> points !
-            <br /><br />
+            <br/><br/>
+            💀 Le perdant est <span id="loser-name"></span> avec <span id="loser-score"></span> points !
+            <br/><br/>
             <button id="restart-btn-popup" onclick="restartGame()">Recommencer</button>
             <button id="details-btn" onclick="toggleDetails()">Détails de la partie</button>
         </div>
