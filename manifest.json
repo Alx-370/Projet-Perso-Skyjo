@@ -6,7 +6,7 @@
   "icons": [
     {
       "src": "icons/logoSkyjo-192x192.png",
-      
+      "sizes": "200x200",
       "type": "image/png"
     },
     {
