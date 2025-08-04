@@ -10,9 +10,9 @@
       "type": "image/jpg"
     },
     {
-      "src": "icons/logoSkyjo-512x512.png",
+      "src": "logoSkyjo.jpg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/jpg"
     }
   ]
 }
