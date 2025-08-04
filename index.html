@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Skyjo Score</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" href="logoSkyjo.jpg" />
@@ -12,7 +13,8 @@
 </head>
 
 <body>
-    <h1>Skyjo - Calculateur de Scores</h1>
+    <h1>Skyjo Score</h1>
+    <h3>Calculateur de Résultats</h3>
 
     <div id="players-container">
         <input type="text" id="player-name" placeholder="Nom du joueur" />
@@ -39,9 +41,11 @@
 
     <div id="winner-popup" class="hidden">
         <div class="winner-content">
-            🎉 Le gagnant est <span id="winner-name"></span> avec <span id="winner-score"></span> points !
+            🎉 Le gagnant est <span class="winner-glow" id="winner-name"></span> avec <span id="winner-score"></span>
+            points !
             <br /><br />
-            💀 Le perdant est <span id="loser-name"></span> avec <span id="loser-score"></span> points !
+            💀 Le perdant est <span class="loser-glow" id="loser-name"></span> avec <span id="loser-score"></span>
+            points !
             <br /><br />
             <button id="restart-btn-popup" onclick="restartGame()">Recommencer</button>
             <button id="details-btn" onclick="toggleDetails()">Détails de la partie</button>
