@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Skyjo Score Tracker</title>
+    <title>Skyjo Score</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="logoSkyjo.jpg" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/logoSkyjo-192x192.png" />
+    <meta name="theme-color" content="#d62828" />
+    <link rel="icon" href="icons/logoSkyjo-192x192.png" />
 </head>
 
 <body>
@@ -38,9 +41,9 @@
     <div id="winner-popup" class="hidden">
         <div class="winner-content">
             🎉 Le gagnant est <span id="winner-name"></span> avec <span id="winner-score"></span> points !
-            <br/><br/>
+            <br /><br />
             💀 Le perdant est <span id="loser-name"></span> avec <span id="loser-score"></span> points !
-            <br/><br/>
+            <br /><br />
             <button id="restart-btn-popup" onclick="restartGame()">Recommencer</button>
             <button id="details-btn" onclick="toggleDetails()">Détails de la partie</button>
         </div>

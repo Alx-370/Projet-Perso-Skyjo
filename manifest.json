@@ -1,0 +1,20 @@
+{
+  "name": "Skyjo Score",
+  "short_name": "Skyjo Score",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#d62828",
+  "icons": [
+    {
+      "src": "icons/logoSkyjo-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/logoSkyjo-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
