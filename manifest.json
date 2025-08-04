@@ -5,9 +5,9 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "icons/logoSkyjo-192x192.png",
-      "sizes": "200x200",
-      "type": "image/png"
+      "src": "logoSkyjo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
     },
     {
       "src": "logoSkyjo.jpg",
