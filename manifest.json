@@ -5,14 +5,14 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "logoSkyjo.jpg",
+      "src": "icons/logoSkyjo-192x192.png",
       "sizes": "192x192",
-      "type": "image/jpg"
+      "type": "image/png"
     },
     {
-      "src": "logoSkyjo.jpg",
+      "src": "icons/logoSkyjo-512x512.png",
       "sizes": "512x512",
-      "type": "image/jpg"
+      "type": "image/png"
     }
   ]
 }
