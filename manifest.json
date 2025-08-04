@@ -3,8 +3,6 @@
   "short_name": "Skyjo Score",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#f8f9fa",
-  "theme_color": "#1c5963",
   "icons": [
     {
       "src": "icons/logoSkyjo-192x192.png",
